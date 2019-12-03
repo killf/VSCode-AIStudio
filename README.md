@@ -1,1 +1,4 @@
-# VSCode-AIStudio
+# AIStudio
+
+The plugin for AIStudio.
+
