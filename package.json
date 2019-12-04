@@ -1,58 +1,115 @@
 {
-    "name": "aistudio",
-    "displayName": "AIStudio",
-    "description": "The plugin for AIStudio.",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.40.0"
-    },
-    "categories": [
-        "Other"
+  "name": "aistudio",
+  "displayName": "AIStudio",
+  "description": "The plugin for AIStudio.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.40.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:AIStudio.setCookie",
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "AIStudio.setCookie",
+        "title": "Set Cookie for AIStuio.",
+        "category": "AIStudio"
+      },
+      {
+        "command": "AIStudio.openTerminal",
+        "title": "Open Terminal for AIStuio.",
+        "category": "AIStudio"
+      },
+      {
+        "command": "AIStudio.runProject",
+        "title": "Run",
+        "category": "AIStudio"
+      },
+      {
+        "command": "AIStudio.stopProject",
+        "title": "Stop",
+        "category": "AIStudio"
+      },
+      {
+        "command": "AIStudio.refreshProject",
+        "title": "Refresh",
+        "category": "AIStudio",
+        "icon": {
+          "light": "img/light/refresh.svg",
+          "dark": "img/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "AIStudio.test",
+        "title": "test.",
+        "category": "AIStudio"
+      }
     ],
-    "activationEvents": [
-        "onCommand:AIStudio.setCookie",
-        "*"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "AIStudio.setCookie",
-                "title": "Set Cookie for AIStuio.",
-                "category": "AIStudio"
-            },
-            {
-                "command": "AIStudio.openTerminal",
-                "title": "Open Terminal for AIStuio.",
-                "category": "AIStudio"
-            },
-            {
-                "command": "AIStudio.test",
-                "title": "test.",
-                "category": "AIStudio"
-            }
-        ]
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aistudio",
+          "title": "AI Studio",
+          "icon": "img/baidu.svg"
+        }
+      ]
     },
-    "scripts": {
-        "compile": "tsc -p ./",
-        "vscode:prepublish": "npm run compile"
+    "views": {
+      "aistudio": [
+        {
+          "id": "projectExplorer",
+          "name": "Project Explorer"
+        }
+      ]
     },
-    "devDependencies": {
-        "@types/glob": "^7.1.1",
-        "@types/mocha": "^5.2.7",
-        "@types/node": "^12.11.7",
-        "@types/request-promise": "^4.1.45",
-        "@types/vscode": "^1.40.0",
-        "@types/websocket": "^1.0.0",
-        "glob": "^7.1.5",
-        "mocha": "^6.2.2",
-        "tslint": "^5.20.0",
-        "typescript": "^3.6.4",
-        "vscode-test": "^1.2.2"
-    },
-    "dependencies": {
-        "request": "^2.88.0",
-        "request-promise": "^4.2.5",
-        "websocket": "^1.0.30"
+    "menus": {
+      "view/title": [
+        {
+          "command": "AIStudio.refreshProject",
+          "when": "view == projectExplorer",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "AIStudio.runProject",
+          "when": "view == projectExplorer && viewItem == stop"
+        },
+        {
+          "command": "AIStudio.stopProject",
+          "when": "view == projectExplorer && viewItem == running"
+        }
+      ]
     }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
+    "@types/request-promise": "^4.1.45",
+    "@types/vscode": "^1.40.0",
+    "@types/websocket": "^1.0.0",
+    "glob": "^7.1.5",
+    "mocha": "^6.2.2",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4",
+    "vscode-test": "^1.2.2"
+  },
+  "dependencies": {
+    "promise-sleep": "^1.0.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "sleep-async": "^1.0.5",
+    "websocket": "^1.0.30"
+  }
 }
